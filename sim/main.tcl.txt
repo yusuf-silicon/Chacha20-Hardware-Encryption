@@ -1,0 +1,4 @@
+# run_sim.tcl
+../chacha20/chacha20.xpr
+launch_simulation
+run all

@@ -1,0 +1,19 @@
+# Vivado build files
+build/
+*.jou
+*.log
+*.str
+*.wdb
+*.pb
+*.webtalk
+*.xml
+*.xpr
+*.xpr.lock
+.Xil/
+*.cache/
+*.ip_user_files/
+*.sim/
+
+
+# Ignore Vivado project folder
+chacha20/
