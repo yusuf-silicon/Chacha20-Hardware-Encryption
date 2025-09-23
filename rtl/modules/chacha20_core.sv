@@ -20,7 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module main(
-
-    );
+module moduleName #(
+    parameter BLOCK_WIDTH = 512,
+    parameter WORD_WIDTH  = 32 
+) (
+    input wire clk,
+    input wire resetn,
+);
+    
 endmodule
