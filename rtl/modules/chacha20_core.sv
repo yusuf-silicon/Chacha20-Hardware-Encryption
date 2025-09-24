@@ -20,10 +20,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module moduleName #(
+module core #(
     parameter BLOCK_WIDTH = 512,
     parameter WORD_WIDTH  = 32 ,
-    para
+    parameter WORD_LENGTH = 16 
 ) (
     input  wire                  clock       ,       //global clock
     input  wire                  reset_n     ,       //global reset_n
@@ -38,28 +38,6 @@ module moduleName #(
 ) ;
 
 //-----------------------------------------------------------------------------------------------
-//   Internal Signals & FSM Setup                                                                    
-//-----------------------------------------------------------------------------------------------
-
-reg [WORD_WIDTH-1:0]  keySetReg [WORD_LENGTH-1:0] = 0 ;
-reg                   keySetReady = 0 ;
-
-reg                   valueReady  = 0 ;
-reg [BLOCK_WIDTH-1:0] valueReg    = 0 ;
-
-reg                   keyTaken    = 0 ;
-reg                   valueTaken  = 0 ;
-
-typedef enum logic [1:0] {
-    IDLE    ,
-    KEY_OPR ,
-    VAL_OPR ,
-    SEND    
-} state ;
-
-state current_state, next_state ;
-
-//-----------------------------------------------------------------------------------------------
 //   Sub Module Initialisation                                                                     
 //-----------------------------------------------------------------------------------------------
 
@@ -68,13 +46,55 @@ key_manager key_manager_entity#()(
     .reset_n       (reset_n)       ,       
 
     .key_set_valid (key_set_valid) ,       
-    .key_set       (keySetReg      ) ,       
-    .key_set_ready (keySetReady) ,        
+    .key_set       (keySetReg    ) ,       
+    .key_set_ready (keySetReady  ) ,        
 
     .nonce_valid   (nonce_valid  ) ,
     .nonce         (nonce        ) ,
     .nonce_ready   (nonce_ready  ) 
 );
+
+quarter_round quarter_round_entity#()(
+    .clock                (clock             ) , 
+    .reset_n              (reset_n           ) ,     
+
+    .key_encryption_valid (keyEncryptionValid) ,                            
+    .key_set              (keySetReg         ) ,     
+    
+    .encrypted_key_valid  (encryptedKeyValid ) ,                               
+    .key                  (encryptedKeySet   )
+);
+
+//-----------------------------------------------------------------------------------------------
+//   Internal Signals & FSM Setup                                                                    
+//-----------------------------------------------------------------------------------------------
+
+reg [WORD_WIDTH-1:0]  keySetReg [WORD_LENGTH-1:0] = 0 ;
+reg [WORD_WIDTH-1:0]  encryptedKeySet [WORD_LENGTH-1:0] = 0 ;
+reg                   keySetReady = 0 ;
+
+reg                   valueReady  = 0 ;
+reg [BLOCK_WIDTH-1:0] valueReg    = 0 ;
+
+reg                   keyTaken    = 0 ;
+reg                   valueTaken  = 0 ;
+
+//signals and flags for fsm state KEY_OPR
+reg  keyEncryptionValid = 0 ;
+reg  keyEncryptionSent  = 0 ;
+reg  encryptedKeyReady  = 0 ;
+reg  keyEncrypted       = 0 ;
+wire encryptedKeyValid      ;
+
+//fsm states
+typedef enum logic [1:0] {
+    IDLE    ,
+    KEY_OPR ,
+    VAL_OPR ,
+    SEND    
+} state ;
+
+state current_state, next_state ;
 
 //-----------------------------------------------------------------------------------------------
 //   Module Logic                                                                     
@@ -97,7 +117,9 @@ always_comb begin : Next_State_Logic
             end
         end
         KEY_OPR : begin
-            
+            if (keyEncrypted) begin
+                next_state = VAL_OPR ;
+            end
         end 
         VAL_OPR : begin
             
@@ -111,9 +133,16 @@ end
 
 always_ff @(posedge clock or negedge reset_n ) begin : Output_Logic
     if (!reset_n) begin
-        keyReady   <= 0 ;
-        valueReady <= 0 ;
-        valueReg    <= 0 ;
+        valueTaken         <= 0 ;
+        valueReady         <= 0 ;
+        valueReg           <= 0 ;
+        keySetReady        <= 0 ;
+        keyTaken           <= 0 ;
+        
+        keyEncryptionValid <= 0 ;
+        encryptedKeyReady  <= 0 ;
+        keyEncryptionSent  <= 0 ;
+        keyEncrypted       <= 0 ;
     end else begin
         case (state)
             IDLE : begin
@@ -128,12 +157,22 @@ always_ff @(posedge clock or negedge reset_n ) begin : Output_Logic
                     keySetReg <= KeySet ;
                 end
             end KEY_OPR : begin
-                valueReady   <= 0 ;
-                keySetReady  <= 0 ;
-                valueTaken   <= 0 ;
-                keyTaken     <= 0 ;
-                
+                valueReady   <= 0 ;     //  
+                keySetReady  <= 0 ;     //  reset previous state values
+                valueTaken   <= 0 ;     //  
+                keyTaken     <= 0 ;     //  
+                keyEncryptionValid <= keyEncryptionSent ? 0 : 1 ;
+                keyEncryptionSent <= 1 ;
+                encryptedKeyReady <= keyEncryptionSent ? 1 : 0; 
+                if (encryptedKeyReady && encryptedKeyValid) begin 
+                    keySetReg <= keySetReg + encryptedKeySet ;
+                    keyEncrypted <= 1 ; 
+                end
             end VAL_OPR : begin
+                keyEncryptionSent  <= 0 ;
+                keyEncryptionValid <= 0 ;
+                encryptedKeyReady  <= 0 ;
+                keyEncrypted       <= 0 ;
                 
             end SEND    : begin
                 

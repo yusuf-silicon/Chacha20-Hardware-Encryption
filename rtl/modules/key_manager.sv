@@ -5,16 +5,16 @@ module key_manager #(
     parameter CONST_COUNT = 4 ,
     parameter KEYS_COUNT  = 8000 
 ) (
-    input  wire                   clock         ,       //global clock
-    input  wire                   reset_n       ,       //global reset_n
+    input  wire                  clock                     ,       //global clock
+    input  wire                  reset_n                   ,       //global reset_n
+            
+    output wire                  key_set_valid             ,       // tells ready to send next input
+    output wire [WORD_WIDTH-1:0] key_set [WORD_LENGTH-1:0] ,       // input - keySet (512 bits)
+    input  wire                  key_set_ready             ,       // tells ready to receive next input
 
-    output wire                   key_set_valid ,       // tells ready to send next input
-    output wire [BLOCK_WIDTH-1:0] key_set       ,       // input - keySet (512 bits)
-    input  wire                   key_set_ready ,       // tells ready to receive next input
-
-    input  wire                   nonce_valid   ,
-    input  wire [WORD_WIDTH-1:0]  nonce [2:0]   ,
-    output wire                   nonce_ready   
+    input  wire                  nonce_valid               ,
+    input  wire [WORD_WIDTH-1:0] nonce [2:0]               ,
+    output wire                  nonce_ready   
 ) ;
 
 //-----------------------------------------------------------------------------------------------
@@ -56,6 +56,7 @@ always_ff @(posedge clock or negedge reset_n) begin
         nonceReady  <= 1 ;
         count       <= 0 ;
         indexKey    <= 0 ;
+        i = 0 ;
     end else begin
         if (!keyReady && nonce_valid) begin
             keySetReady <= 0 ;
