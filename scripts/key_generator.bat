@@ -12,6 +12,9 @@ python gen_keys.py
 REM Run the third Python script
 python gen_nonce.py
 
+REM Run the third Python script
+python gen_values.py
+
 echo All scripts have finished.
 echo This window will close in 3 seconds...
 timeout /t 3 >nul
