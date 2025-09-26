@@ -1,7 +1,7 @@
 import secrets
 import csv
 
-num_values = 100
+num_values = 1600
 filename = "../../data/value.txt"
 
 
@@ -9,7 +9,7 @@ with open(filename, 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
 
     for _ in range(num_values):
-        hex_string = secrets.token_hex(64)
+        hex_string = secrets.token_hex(4)
         #verilog_hex = f"128'h{hex_string}"
         writer.writerow([hex_string])
 

@@ -1,0 +1,40 @@
+#-----------------------------------------------------------
+# Vivado v2025.1 (64-bit)
+# SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Fri Sep 26 19:27:38 2025
+# Process ID         : 5780
+# Current directory  : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent12404 C:\Users\Yusuf\Documents\Production\VLSI\Projects\Chacha20 - Encryption\chacha20\chacha20.xpr
+# Log file           : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/vivado.log
+# Journal file       : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20\vivado.jou
+# Running On         : DESKTOP-9T3L2UE
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 19045
+# Processor Detail   : Intel(R) Core(TM) i7-4870HQ CPU @ 2.50GHz
+# CPU Frequency      : 2494 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 17050 MB
+# Swap memory        : 2550 MB
+# Total Virtual      : 19600 MB
+# Available Virtual  : 8583 MB
+#-----------------------------------------------------------
+start_gui
+open_project {C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/chacha20.xpr}
+update_compile_order -fileset sources_1
+remove_files  {{C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/main.sv}}
+add_files -norecurse {{C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv} {C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv} {C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/state_matrix.sv} {C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/chacha20_fpga_top.sv} {C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/chacha20_core.sv}}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1

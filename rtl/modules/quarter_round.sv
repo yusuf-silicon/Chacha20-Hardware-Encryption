@@ -20,16 +20,16 @@ module quarter_round #(
 typedef reg [WORD_WIDTH-1:0] typeWordSet [3:0]            ;
 typedef reg [WORD_WIDTH-1:0] typeKeySet [WORD_LENGTH-1:0] ;
 
-typeWordSet          QtrRndKey  ;
+typeWordSet          qtrRndKey  ;
 typeKeySet           keySetTemp ;
-reg [WORD_WIDTH-1:0] KeySet [WORD_LENGTH-1:0] ;
+reg [WORD_WIDTH-1:0] keySet [WORD_LENGTH-1:0] ;
 
-reg keyEncryptionValid <= 0 ; 
-reg keyEncryptionTaken <= 0 ;
-reg keyEncrypting      <= 0 ;
-reg keyEncryptingDone  <= 0 ;
+reg keyEncryptionValid = 0 ; 
+reg keyEncryptionTaken = 0 ;
+reg keyEncrypting      = 0 ;
+reg keyEncryptingDone  = 0 ;
 
-reg encryptedKeyValid  <= 0 ;
+reg encryptedKeyValid  = 0 ;
 
 int iterations     = 20 ;
 int iterationCount = iterations ;
@@ -48,26 +48,32 @@ int i = 0;
 //-----------------------------------------------------------------------------------------------
 
 function typeWordSet quarterRound(input typeKeySet keySet, input int i1, input int i2, input int i3, input int i4);
+    typeWordSet wordSet ;
+    
     keySet[i1] = keySet[i1] + keySet[i2] ; keySet[i4] = keySet[i4] ^ keySet[i1] ; keySet[i4] <<<= 16 ;
     keySet[i3] = keySet[i3] + keySet[i4] ; keySet[i2] = keySet[i2] ^ keySet[i3] ; keySet[i2] <<<= 12 ;
     keySet[i1] = keySet[i1] + keySet[i2] ; keySet[i4] = keySet[i4] ^ keySet[i1] ; keySet[i4] <<<= 8  ;
     keySet[i3] = keySet[i3] + keySet[i4] ; keySet[i2] = keySet[i2] ^ keySet[i3] ; keySet[i2] <<<= 7  ;
-    wordSet[0] <= keySet[i1] ; wordSet[1] <= keySet[i2] ; wordSet[2] <= keySet[i3] ; wordSet[3] <= keySet[i4] ;
+    
+    wordSet[0] = keySet[i1] ;
+    wordSet[1] = keySet[i2] ;
+    wordSet[2] = keySet[i3] ; 
+    wordSet[3] = keySet[i4] ;
+    
     return wordSet ;
 endfunction
 
-always_ff @(posedge clock or nedgedge reset_n) begin
+always_ff @(posedge clock or negedge reset_n) begin
     if (!reset_n) begin
         keyEncryptionValid <= 0 ;
         keyEncryptionTaken <= 0 ;
         keyEncrypting      <= 0 ;
         keyEncryptingDone  <= 0 ;
         encryptedKeyValid  <= 0 ;
-        iterationCount     <= 20 ;
+        iterationCount     <= 20;
         arrIndex           <= 0 ;
         i  <= 0 ;
-    end
-    else begin
+    end else begin
         if (key_encryption_valid) begin
             encryptedKeyValid <= 0 ;
             keySet <= key_set ;
@@ -80,12 +86,12 @@ always_ff @(posedge clock or nedgedge reset_n) begin
             end
         end else if (keyEncrypting) begin                   
             for ( i=0 ; i < qrtRndCount ; i++ ) begin
-                qtrRndKey = quarterRound(keySetTemp, arr1[arrIndex], arr2[arrIndex], arr3[arrIndex], arr4[arrIndex]) ;
-                KeySetTemp[arr1[arrIndex]] <= qtrRndKey[0] ;
-                KeySetTemp[arr2[arrIndex]] <= qtrRndKey[1] ;
-                KeySetTemp[arr3[arrIndex]] <= qtrRndKey[2] ;
-                KeySetTemp[arr4[arrIndex]] <= qtrRndKey[3] ;
-                arrIndex = (arrIndex == 7) ? 0 : arrIndex + 1 ;
+                qtrRndKey <= quarterRound(keySetTemp, arr1[arrIndex], arr2[arrIndex], arr3[arrIndex], arr4[arrIndex]) ;
+                keySetTemp[arr1[arrIndex]] <= qtrRndKey[0] ;
+                keySetTemp[arr2[arrIndex]] <= qtrRndKey[1] ;
+                keySetTemp[arr3[arrIndex]] <= qtrRndKey[2] ;
+                keySetTemp[arr4[arrIndex]] <= qtrRndKey[3] ;
+                arrIndex <= (arrIndex == 7) ? 0 : arrIndex + 1 ;
             end
             if (iterationCount == 1) begin
                 keyEncrypting  <= 00 ;
@@ -94,7 +100,7 @@ always_ff @(posedge clock or nedgedge reset_n) begin
             end
         end else if (keyEncryptingDone) begin
             for ( i=0 ; i < WORD_LENGTH; i++ ) begin
-                keySet[i] <= KeySetTemp[i] ;
+                keySet[i] <= keySetTemp[i] ;
             end
             encryptedKeyValid <= 1 ;
             keyEncryptingDone <= 0 ;

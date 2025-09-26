@@ -61,13 +61,13 @@ always_ff @(posedge clock or negedge reset_n) begin
         if (!keyReady && nonce_valid) begin
             keySetReady <= 0 ;
             for ( i=4 ; i < 12 ; i++ ) begin
-                keySetReady[i] <= keys[$urandom % KEYS_COUNT] 
+                keySetReg[i] <= keys[$urandom % KEYS_COUNT] ;
             end
             if (count == 32'hffffffff) begin
-                keySetReady[12] <= count ;
+                keySetReg[12] <= count ;
                 count <= 0               ;
             end else begin
-                keySetReady[12] <= count ; 
+                keySetReg[12] <= count ; 
                 count++                  ;
             end
             for ( i=13 ; i <= 15 ; i++ ) begin
