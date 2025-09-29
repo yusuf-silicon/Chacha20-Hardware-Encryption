@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module quarter_round #(
     parameter BLOCK_WIDTH = 512,
     parameter WORD_WIDTH  = 32 ,
@@ -16,6 +18,8 @@ module quarter_round #(
 //-----------------------------------------------------------------------------------------------
 //   Internal Signals & FSM Setup                                                                    
 //-----------------------------------------------------------------------------------------------
+
+reg done = 0 ;        //main cycle complete
 
 typedef reg [WORD_WIDTH-1:0] typeWordSet [3:0]            ;
 typedef reg [WORD_WIDTH-1:0] typeKeySet [WORD_LENGTH-1:0] ;
@@ -65,6 +69,8 @@ endfunction
 
 always_ff @(posedge clock or negedge reset_n) begin
     if (!reset_n) begin
+        done <= 0 ; 
+
         keyEncryptionValid <= 0 ;
         keyEncryptionTaken <= 0 ;
         keyEncrypting      <= 0 ;
@@ -74,7 +80,8 @@ always_ff @(posedge clock or negedge reset_n) begin
         arrIndex           <= 0 ;
         i  <= 0 ;
     end else begin
-        if (key_encryption_valid) begin
+        if (key_encryption_valid && done) begin
+            done <= 0 ;
             encryptedKeyValid <= 0 ;
             keySet <= key_set ;
             keyEncryptionTaken <= 1 ;
@@ -86,14 +93,15 @@ always_ff @(posedge clock or negedge reset_n) begin
             end
         end else if (keyEncrypting) begin                   
             for ( i=0 ; i < qrtRndCount ; i++ ) begin
-                qtrRndKey <= quarterRound(keySetTemp, arr1[arrIndex], arr2[arrIndex], arr3[arrIndex], arr4[arrIndex]) ;
+                qtrRndKey = quarterRound(keySetTemp, arr1[arrIndex], arr2[arrIndex], arr3[arrIndex], arr4[arrIndex]) ;
                 keySetTemp[arr1[arrIndex]] <= qtrRndKey[0] ;
                 keySetTemp[arr2[arrIndex]] <= qtrRndKey[1] ;
                 keySetTemp[arr3[arrIndex]] <= qtrRndKey[2] ;
                 keySetTemp[arr4[arrIndex]] <= qtrRndKey[3] ;
                 arrIndex <= (arrIndex == 7) ? 0 : arrIndex + 1 ;
+                iterationCount-- ;
             end
-            if (iterationCount == 1) begin
+            if (iterationCount == 0) begin
                 keyEncrypting  <= 00 ;
                 iterationCount <= 20 ;
                 keyEncryptingDone <= 1 ;
@@ -105,7 +113,10 @@ always_ff @(posedge clock or negedge reset_n) begin
             encryptedKeyValid <= 1 ;
             keyEncryptingDone <= 0 ;
         end
-        else encryptedKeyValid <= 0 ;
+        else begin
+            encryptedKeyValid <= 0 ;
+            done              <= 1 ;
+        end
     end
 end
 

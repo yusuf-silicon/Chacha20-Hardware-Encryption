@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module key_manager #(
     parameter BLOCK_WIDTH = 512,
     parameter WORD_WIDTH  = 32 ,
@@ -33,52 +35,64 @@ reg [WORD_WIDTH-1:0] keySetReg [WORD_LENGTH-1:0] ;
 reg nonceReady     = 0 ;
 
 reg keyReady       = 0 ;
-reg keySetReady    = 0 ;
+reg keySetValid    = 0 ;
 
 integer count      = 0 ;
 integer indexKey   = 0 ;
 
-integer i ;
+integer i = 0;
+integer j = 0;
 
 //-----------------------------------------------------------------------------------------------
 //   Module Logic                                                                     
 //-----------------------------------------------------------------------------------------------
 
 initial begin
-    $readmemh("../data/constants.txt",keySetReg) ;
-    $readmemh("../data/keys.txt",keys)           ;
+    $readmemh("../../../../../data/constants.txt",constants) ;
+    $readmemh("../../../../../data/keys.txt",keys)           ;
+    for ( j=0 ; j <= 3 ; j++) begin
+        keySetReg[15-j] = constants[j] ;
+    end
+//    for ( i=0 ; i < 4 ; i++ ) begin
+//        $display("The value of constants at [ %d ] is: %h",i, constants[i]) ; 
+//        $display("The value of constants inside keySetReg is at [ %d ] is: %h",(15-i), keySetReg[15-i]) ; 
+//    end
+//    for ( i=0 ; i < 5 ; i++ ) begin
+//        $display("The value of keys at [ %d ] is: %h",i*100, keys[i*100]) ; 
+//    end
 end
 
 always_ff @(posedge clock or negedge reset_n) begin
     if (!reset_n) begin
         keyReady    <= 0 ;
-        keySetReady <= 0 ;
+        keySetValid <= 0 ;
         nonceReady  <= 1 ;
         count       <= 0 ;
         indexKey    <= 0 ;
-        i = 0 ;
+        i <= 0 ;
+
     end else begin
         if (!keyReady && nonce_valid) begin
-            keySetReady <= 0 ;
-            for ( i=4 ; i < 12 ; i++ ) begin
-                keySetReg[i] <= keys[$urandom % KEYS_COUNT] ;
+            keySetValid <= 0 ;
+            for ( i=0 ; i < 8 ; i++ ) begin
+                keySetReg[11-i] <= keys[$urandom % KEYS_COUNT] ;
             end
             if (count == 32'hffffffff) begin
-                keySetReg[12] <= count ;
+                keySetReg[3] <= count ;
                 count <= 0               ;
             end else begin
-                keySetReg[12] <= count ; 
+                keySetReg[3] <= count ; 
                 count++                  ;
             end
-            for ( i=13 ; i <= 15 ; i++ ) begin
-                keySetReg[i] <= nonce[i-13];
+            for ( i=0 ; i < 3 ; i++ ) begin
+                keySetReg[2-i] <= nonce[2-i];
             end
             nonceReady <= 0   ;
             keyReady <= 1     ;
         end
         if (keyReady) begin
-            keySetReady <= 1 ;
-            if (key_set_valid) begin
+            keySetValid <= 1 ;
+            if (key_set_ready) begin
                 keyReady <= 0;
                 nonceReady <= 1;
             end
@@ -86,7 +100,7 @@ always_ff @(posedge clock or negedge reset_n) begin
     end
 end
 
-assign key_set_ready = keySetReady ;
+assign key_set_valid = keySetValid ;
 assign key_set = keySetReg         ;
 assign nonce_ready = nonceReady    ;
 

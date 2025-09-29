@@ -3,10 +3,10 @@
 # SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
 # IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
 # SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-# Start of session at: Mon Sep 29 09:57:55 2025
-# Process ID         : 708
+# Start of session at: Sun Sep 28 00:05:19 2025
+# Process ID         : 3896
 # Current directory  : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20
-# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent6308 C:\Users\Yusuf\Documents\Production\VLSI\Projects\Chacha20 - Encryption\chacha20\chacha20.xpr
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent14284 C:\Users\Yusuf\Documents\Production\VLSI\Projects\Chacha20 - Encryption\chacha20\chacha20.xpr
 # Log file           : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/vivado.log
 # Journal file       : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20\vivado.jou
 # Running On         : DESKTOP-9T3L2UE
@@ -19,7 +19,23 @@
 # Host memory        : 17050 MB
 # Swap memory        : 2550 MB
 # Total Virtual      : 19600 MB
-# Available Virtual  : 17112 MB
+# Available Virtual  : 8792 MB
 #-----------------------------------------------------------
 start_gui
 open_project {C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/chacha20.xpr}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+synth_design -top top -part xc7s15ftgb196-1 -lint 
+launch_simulation
+launch_simulation
+source mainTB.tcl
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+relaunch_sim
+close_sim
+launch_simulation
+source mainTB.tcl
+close_sim

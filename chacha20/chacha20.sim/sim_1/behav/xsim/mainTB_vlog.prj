@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  --include "../../../../../../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef" \
+"../../../../../rtl/chacha20_top.sv" \
+"../../../../../rtl/modules/core.sv" \
+"../../../../../rtl/modules/key_manager.sv" \
+"../../../../../rtl/modules/quarter_round.sv" \
+"../../../../../tb/mainTB.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

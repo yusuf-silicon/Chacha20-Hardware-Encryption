@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module top #(
     parameter BLOCK_WIDTH = 512,
     parameter WORD_WIDTH  = 32 ,

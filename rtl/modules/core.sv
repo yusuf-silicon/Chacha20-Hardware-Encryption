@@ -42,34 +42,6 @@ module core #(
 ) ;
 
 //-----------------------------------------------------------------------------------------------
-//   Sub Module Initialisation                                                                     
-//-----------------------------------------------------------------------------------------------
-
-key_manager key_manager_entity(
-    .clock                (clock             ) ,       
-    .reset_n              (reset_n           ) ,       
-
-    .key_set_valid        (keySetValid       ) ,       
-    .key_set              (keySetWire        ) ,       
-    .key_set_ready        (keySetReady       ) ,        
-
-    .nonce_valid          (nonce_valid       ) ,
-    .nonce                (nonce             ) ,
-    .nonce_ready          (nonce_ready       )       
-);
-
-quarter_round quarter_round_entity(
-    .clock                (clock             ) , 
-    .reset_n              (reset_n           ) ,     
-
-    .key_encryption_valid (keyEncryptionValid) ,                            
-    .key_set              (keySetReg         ) ,     
-    
-    .encrypted_key_valid  (encryptedKeyValid ) ,                               
-    .key                  (encryptedKeySet   )
-);
-
-//-----------------------------------------------------------------------------------------------
 //   Internal Signals & FSM Setup                                                                    
 //-----------------------------------------------------------------------------------------------
 
@@ -112,6 +84,34 @@ typedef enum logic [1:0] {
 state current_state, next_state ;
 
 //-----------------------------------------------------------------------------------------------
+//   Sub Module Initialisation                                                                     
+//-----------------------------------------------------------------------------------------------
+
+key_manager key_manager_entity(
+    .clock                (clock             ) ,       
+    .reset_n              (reset_n           ) ,       
+
+    .key_set_valid        (keySetValid       ) ,       
+    .key_set              (keySetWire        ) ,       
+    .key_set_ready        (keySetReady       ) ,        
+
+    .nonce_valid          (nonce_valid       ) ,
+    .nonce                (nonce             ) ,
+    .nonce_ready          (nonce_ready       )       
+);
+
+quarter_round quarter_round_entity(
+    .clock                (clock             ) , 
+    .reset_n              (reset_n           ) ,     
+
+    .key_encryption_valid (keyEncryptionValid) ,                            
+    .key_set              (keySetReg         ) ,     
+    
+    .encrypted_key_valid  (encryptedKeyValid ) ,                               
+    .key                  (encryptedKeySet   )
+);
+
+//-----------------------------------------------------------------------------------------------
 //   Module Logic                                                                     
 //-----------------------------------------------------------------------------------------------
 
@@ -142,7 +142,9 @@ always_comb begin : Next_State_Logic
             end
         end 
         SEND : begin
-            
+            if (codeSent) begin
+                next_state = IDLE ;
+            end
         end 
         default: next_state = IDLE ; 
     endcase
@@ -180,7 +182,7 @@ always_ff @(posedge clock or negedge reset_n ) begin : Output_Logic
                     valueReg   <= value ;
                 end
                 if (!keyTaken   && keySetValid) begin
-                    keyTaken  <= 1      ;
+                    keyTaken  <= 1          ;
                     keySetReg <= keySetWire ;
                 end
 
@@ -196,7 +198,9 @@ always_ff @(posedge clock or negedge reset_n ) begin : Output_Logic
                 encryptedKeyReady <= keyEncryptionSent ? 1 : 0; 
                 
                 if (encryptedKeyReady && encryptedKeyValid) begin 
-                    keySetReg <= keySetReg + encryptedKeySet ;
+                    for ( i=0 ; i < WORD_LENGTH ; i++ ) begin
+                        keySetReg[i] <= keySetReg[i] + encryptedKeySet[i] ;
+                    end
                     keyEncrypted <= 1 ; 
                 end
 
