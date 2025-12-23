@@ -1,0 +1,169 @@
+#-----------------------------------------------------------
+# Vivado v2025.1 (64-bit)
+# SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Mon Sep 29 09:57:55 2025
+# Process ID         : 708
+# Current directory  : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent6308 C:\Users\Yusuf\Documents\Production\VLSI\Projects\Chacha20 - Encryption\chacha20\chacha20.xpr
+# Log file           : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/vivado.log
+# Journal file       : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20\vivado.jou
+# Running On         : DESKTOP-9T3L2UE
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 19045
+# Processor Detail   : Intel(R) Core(TM) i7-4870HQ CPU @ 2.50GHz
+# CPU Frequency      : 2494 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 17050 MB
+# Swap memory        : 2550 MB
+# Total Virtual      : 19600 MB
+# Available Virtual  : 17112 MB
+#-----------------------------------------------------------
+start_gui
+open_project {C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/chacha20.xpr}
+update_compile_order -fileset sources_1
+launch_simulation
+source mainTB.tcl
+current_wave_config {Untitled 1}
+add_wave {{/mainTB/top_entity/core_entity/quarter_round_entity/clock}} {{/mainTB/top_entity/core_entity/quarter_round_entity/reset_n}} {{/mainTB/top_entity/core_entity/quarter_round_entity/key_encryption_valid}} {{/mainTB/top_entity/core_entity/quarter_round_entity/key_set}} {{/mainTB/top_entity/core_entity/quarter_round_entity/encrypted_key_valid}} {{/mainTB/top_entity/core_entity/quarter_round_entity/key}} {{/mainTB/top_entity/core_entity/quarter_round_entity/done}} {{/mainTB/top_entity/core_entity/quarter_round_entity/qtrRndKey}} {{/mainTB/top_entity/core_entity/quarter_round_entity/keySetTemp}} {{/mainTB/top_entity/core_entity/quarter_round_entity/keySet}} {{/mainTB/top_entity/core_entity/quarter_round_entity/keyEncryptionValid}} {{/mainTB/top_entity/core_entity/quarter_round_entity/keyEncryptionTaken}} {{/mainTB/top_entity/core_entity/quarter_round_entity/keyEncrypting}} {{/mainTB/top_entity/core_entity/quarter_round_entity/keyEncryptingDone}} {{/mainTB/top_entity/core_entity/quarter_round_entity/encryptedKeyValid}} {{/mainTB/top_entity/core_entity/quarter_round_entity/iterations}} {{/mainTB/top_entity/core_entity/quarter_round_entity/iterationCount}} {{/mainTB/top_entity/core_entity/quarter_round_entity/qrtRndCount}} {{/mainTB/top_entity/core_entity/quarter_round_entity/arrIndex}} {{/mainTB/top_entity/core_entity/quarter_round_entity/arr1}} {{/mainTB/top_entity/core_entity/quarter_round_entity/arr2}} {{/mainTB/top_entity/core_entity/quarter_round_entity/arr3}} {{/mainTB/top_entity/core_entity/quarter_round_entity/arr4}} {{/mainTB/top_entity/core_entity/quarter_round_entity/i}} {{/mainTB/top_entity/core_entity/quarter_round_entity/BLOCK_WIDTH}} {{/mainTB/top_entity/core_entity/quarter_round_entity/WORD_WIDTH}} {{/mainTB/top_entity/core_entity/quarter_round_entity/WORD_LENGTH}} 
+relaunch_sim
+close_sim
+launch_simulation
+source mainTB.tcl
+current_wave_config {Untitled 2}
+add_wave {{/mainTB/top_entity/core_entity/quarter_round_entity}} 
+relaunch_sim
+run 10 us
+close_sim
+launch_simulation
+source mainTB.tcl
+close_sim
+launch_simulation
+launch_simulation
+source mainTB.tcl
+close_sim
+launch_simulation
+source mainTB.tcl
+close_sim
+launch_simulation
+source mainTB.tcl
+close_sim
+launch_simulation
+source mainTB.tcl
+close_sim
+launch_simulation
+source mainTB.tcl
+close_sim
+launch_simulation
+source mainTB.tcl
+close_sim
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+synth_design -rtl -rtl_skip_mlo -name rtl_1
+synth_design -top top -part xc7s15ftgb196-1 -lint 
+report_methodology -name ultrafast_methodology_1
+report_ssn -name ssn_1
+reset_run impl_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+open_run synth_1 -name synth_1
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1
+report_power -name {power_1}
+report_ssn -name ssn_1
+report_operating_conditions -grade -return_string
+close_design
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top core [current_fileset]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+launch_runs impl_1 -jobs 4
+launch_runs impl_1 -jobs 4
+open_run synth_1 -name synth_1
+report_power -name {power_1}
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1
+report_methodology -name ultrafast_methodology_1
+report_utilization -name utilization_1
+report_drc -name drc_1 -ruledecks {default}
+report_utilization -name utilization_2
+report_clock_interaction -delay_type min_max -significant_digits 3 -name timing_2
+report_clock_networks -name {network_1}
+close_design
+close_design
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top top [current_fileset]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+open_run synth_1 -name synth_1
+launch_runs impl_1 -jobs 4
+check_timing -verbose -name timing_1
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_2
+report_methodology -name ultrafast_methodology_1
+report_ssn -name ssn_1
+report_operating_conditions -grade -return_string
+report_utilization -name utilization_1
+report_utilization -name utilization_2
+report_power -name {power_1}
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+synth_design -rtl -rtl_skip_mlo -name rtl_1
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+synth_design -top top -part xc7s15ftgb196-1 -lint 
+report_ssn -name ssn_1
+refresh_design
+refresh_design
+refresh_design
+refresh_design
+refresh_design
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+current_design synth_1
+close_design
+open_run synth_1 -name synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+check_timing -verbose -name timing_1
+report_power -name {power_1}
+report_utilization -name utilization_1
+launch_simulation
+source mainTB.tcl
+close_sim
+current_design rtl_1
+refresh_design
+report_ssn -name ssn_1
+report_drc -name drc_1 -ruledecks {default}
+write_schematic -format pdf -orientation landscape C:/Users/Yusuf/Desktop/schematic.pdf
+report_methodology -name ultrafast_methodology_1
+current_design synth_1
+create_dataflow_design
+write_schematic -format pdf -orientation portrait -force C:/Users/Yusuf/Desktop/schematic.pdf
+current_design synth_1
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_2
+report_clock_networks -name {network_1}
+reset_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+close_design

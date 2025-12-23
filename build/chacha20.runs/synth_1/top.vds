@@ -1,0 +1,567 @@
+#-----------------------------------------------------------
+# Vivado v2025.1 (64-bit)
+# SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Mon Sep 29 20:45:49 2025
+# Process ID         : 10488
+# Current directory  : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/chacha20.runs/synth_1
+# Command line       : vivado.exe -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
+# Log file           : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/chacha20.runs/synth_1/top.vds
+# Journal file       : C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/chacha20.runs/synth_1\vivado.jou
+# Running On         : DESKTOP-9T3L2UE
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 19045
+# Processor Detail   : Intel(R) Core(TM) i7-4870HQ CPU @ 2.50GHz
+# CPU Frequency      : 2494 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 17050 MB
+# Swap memory        : 2550 MB
+# Total Virtual      : 19600 MB
+# Available Virtual  : 5772 MB
+#-----------------------------------------------------------
+source top.tcl -notrace
+create_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:07 . Memory (MB): peak = 503.184 ; gain = 210.254
+Command: read_checkpoint -auto_incremental -incremental {C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/chacha20.srcs/utils_1/imports/synth_1/top.dcp}
+INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/chacha20.srcs/utils_1/imports/synth_1/top.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top top -part xc7s15ftgb196-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7s15'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7s15'
+INFO: [Device 21-403] Loading part xc7s15ftgb196-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 11580
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1154.969 ; gain = 493.273
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'top' [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/chacha20_top.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'core' [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'key_manager' [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:3]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/data/constants.txt' is read successfully [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:51]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/data/keys.txt' is read successfully [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:52]
+WARNING: [Synth 8-11581] system function call 'urandom' not supported [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-11581] system function call 'urandom' not supported [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-11581] system function call 'urandom' not supported [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-11581] system function call 'urandom' not supported [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-11581] system function call 'urandom' not supported [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-11581] system function call 'urandom' not supported [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-11581] system function call 'urandom' not supported [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-11581] system function call 'urandom' not supported [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+INFO: [Synth 8-6155] done synthesizing module 'key_manager' (0#1) [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'quarter_round' [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:3]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:57]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:58]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:59]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:59]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:59]
+WARNING: [Synth 8-6104] Input port '(null)[0].keySet' has an internal driver [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:59]
+INFO: [Common 17-14] Message 'Synth 8-6104' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-6155] done synthesizing module 'quarter_round' (0#1) [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:3]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:128]
+INFO: [Synth 8-6155] done synthesizing module 'core' (0#1) [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:23]
+INFO: [Synth 8-6155] done synthesizing module 'top' (0#1) [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/chacha20_top.sv:3]
+WARNING: [Synth 8-6014] Unused sequential element indexKey_reg was removed.  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:73]
+WARNING: [Synth 8-6014] Unused sequential element i_reg was removed.  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:74]
+WARNING: [Synth 8-7137] Register keySetReg_reg[11] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[10] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[9] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[8] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[7] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[6] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[5] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[4] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[3] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[2] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[1] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-7137] Register keySetReg_reg[0] in module key_manager has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:80]
+WARNING: [Synth 8-3848] Net keySetReg[15] in module/entity key_manager does not have driver. [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:33]
+WARNING: [Synth 8-3848] Net keySetReg[14] in module/entity key_manager does not have driver. [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:33]
+WARNING: [Synth 8-3848] Net keySetReg[13] in module/entity key_manager does not have driver. [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:33]
+WARNING: [Synth 8-3848] Net keySetReg[12] in module/entity key_manager does not have driver. [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/key_manager.sv:33]
+WARNING: [Synth 8-6014] Unused sequential element keyEncryptionValid_reg was removed.  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:74]
+WARNING: [Synth 8-6014] Unused sequential element i_reg was removed.  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:81]
+WARNING: [Synth 8-6014] Unused sequential element qtrRndKey_reg[3] was removed.  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:96]
+WARNING: [Synth 8-6014] Unused sequential element qtrRndKey_reg[2] was removed.  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:96]
+WARNING: [Synth 8-6014] Unused sequential element qtrRndKey_reg[1] was removed.  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:96]
+WARNING: [Synth 8-6014] Unused sequential element qtrRndKey_reg[0] was removed.  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:96]
+WARNING: [Synth 8-7137] Register keySet_reg[15] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[14] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[13] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[12] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[11] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[10] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[9] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[8] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[7] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[6] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[5] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[4] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[3] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[2] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[1] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySet_reg[0] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:86]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[15] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[14] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[13] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[12] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[11] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[10] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[9] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[8] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[7] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[6] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[5] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[4] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[3] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[2] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[1] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-7137] Register keySetTemp_reg[0] in module quarter_round has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/quarter_round.sv:92]
+WARNING: [Synth 8-6014] Unused sequential element i_reg was removed.  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:166]
+WARNING: [Synth 8-7137] Register codeSent_reg in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:175]
+WARNING: [Synth 8-7137] Register valueReg_reg[15] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[14] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[13] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[12] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[11] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[10] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[9] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[8] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[7] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[6] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[5] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[4] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[3] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[2] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[1] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register valueReg_reg[0] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:182]
+WARNING: [Synth 8-7137] Register keySetReg_reg[15] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[14] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[13] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[12] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[11] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[10] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[9] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[8] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[7] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[6] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[5] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[4] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[3] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[2] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[1] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7137] Register keySetReg_reg[0] in module core has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/rtl/modules/core.sv:108]
+WARNING: [Synth 8-7129] Port key_set[15][31] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][30] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][29] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][28] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][27] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][26] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][25] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][24] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][23] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][22] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][21] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][20] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][19] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][18] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][17] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][16] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][15] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][14] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][13] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][12] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][11] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][10] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][9] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][8] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][7] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][6] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][5] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][4] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][3] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][2] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][1] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[15][0] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][31] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][30] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][29] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][28] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][27] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][26] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][25] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][24] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][23] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][22] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][21] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][20] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][19] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][18] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][17] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][16] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][15] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][14] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][13] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][12] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][11] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][10] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][9] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][8] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][7] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][6] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][5] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][4] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][3] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][2] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][1] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[14][0] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][31] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][30] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][29] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][28] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][27] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][26] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][25] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][24] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][23] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][22] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][21] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][20] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][19] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][18] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][17] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][16] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][15] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][14] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][13] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][12] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][11] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][10] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][9] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][8] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][7] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][6] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][5] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][4] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][3] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][2] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][1] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[13][0] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[12][31] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[12][30] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[12][29] in module key_manager is either unconnected or has no load
+WARNING: [Synth 8-7129] Port key_set[12][28] in module key_manager is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1299.578 ; gain = 637.883
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1299.578 ; gain = 637.883
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1299.578 ; gain = 637.883
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.192 . Memory (MB): peak = 1299.578 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/constraints/constraints.xdc]
+Finished Parsing XDC File [C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/constraints/constraints.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1380.676 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.068 . Memory (MB): peak = 1380.676 ; gain = 0.000
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1380.676 ; gain = 718.980
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7s15ftgb196-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1380.676 ; gain = 718.980
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1380.676 ; gain = 718.980
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'current_state_reg' in module 'core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                               00 |                               00
+                 KEY_OPR |                               01 |                               01
+                 VAL_OPR |                               10 |                               10
+                    SEND |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'current_state_reg' using encoding 'sequential' in module 'core'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:35 ; elapsed = 00:00:39 . Memory (MB): peak = 1380.676 ; gain = 718.980
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 24    
++---XORs : 
+	   2 Input     32 Bit         XORs := 20    
++---Registers : 
+	               32 Bit    Registers := 71    
+	                1 Bit    Registers := 19    
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 39    
+	   9 Input   32 Bit        Muxes := 4     
+	   4 Input   32 Bit        Muxes := 32    
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 19    
+	   4 Input    1 Bit        Muxes := 21    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 20 (col length:20)
+BRAMs: 20 (col length: RAMB18 20 RAMB36 10)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:53 ; elapsed = 00:00:57 . Memory (MB): peak = 1404.312 ; gain = 742.617
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:00 ; elapsed = 00:01:05 . Memory (MB): peak = 1488.578 ; gain = 826.883
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:02 ; elapsed = 00:01:06 . Memory (MB): peak = 1519.922 ; gain = 858.227
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:04 ; elapsed = 00:01:08 . Memory (MB): peak = 1529.004 ; gain = 867.309
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:10 ; elapsed = 00:01:14 . Memory (MB): peak = 1739.781 ; gain = 1078.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:10 ; elapsed = 00:01:14 . Memory (MB): peak = 1739.781 ; gain = 1078.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:11 ; elapsed = 00:01:15 . Memory (MB): peak = 1739.781 ; gain = 1078.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:11 ; elapsed = 00:01:15 . Memory (MB): peak = 1739.781 ; gain = 1078.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:12 ; elapsed = 00:01:16 . Memory (MB): peak = 1739.781 ; gain = 1078.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:12 ; elapsed = 00:01:16 . Memory (MB): peak = 1739.781 ; gain = 1078.086
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |   160|
+|3     |LUT1   |    62|
+|4     |LUT2   |   901|
+|5     |LUT3   |   653|
+|6     |LUT4   |   534|
+|7     |LUT5   |   215|
+|8     |LUT6   |    70|
+|9     |FDCE   |   114|
+|10    |FDPE   |     4|
+|11    |FDRE   |  2073|
+|12    |FDSE   |   104|
+|13    |IBUF   |   613|
+|14    |OBUF   |   515|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:12 ; elapsed = 00:01:16 . Memory (MB): peak = 1739.781 ; gain = 1078.086
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 129 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:54 ; elapsed = 00:01:12 . Memory (MB): peak = 1739.781 ; gain = 996.988
+Synthesis Optimization Complete : Time (s): cpu = 00:01:12 ; elapsed = 00:01:16 . Memory (MB): peak = 1739.781 ; gain = 1078.086
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.079 . Memory (MB): peak = 1748.949 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 160 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1752.625 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: e2fa909c
+INFO: [Common 17-83] Releasing license: Synthesis
+35 Infos, 299 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:17 ; elapsed = 00:01:23 . Memory (MB): peak = 1752.625 ; gain = 1242.055
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.026 . Memory (MB): peak = 1752.625 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/chacha20/chacha20.runs/synth_1/top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Sep 29 20:47:23 2025...
