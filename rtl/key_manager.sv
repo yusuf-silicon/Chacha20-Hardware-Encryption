@@ -48,8 +48,8 @@ integer j = 0;
 //-----------------------------------------------------------------------------------------------
 
 initial begin
-    $readmemh("C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/data/constants.txt",constants) ;
-    $readmemh("C:/Users/Yusuf/Documents/Production/VLSI/Projects/Chacha20 - Encryption/data/keys.txt",keys)           ;
+    $readmemh("../../../../../../data/constants.txt",constants) ;
+    $readmemh("../../../../../../data/keys.txt",keys)           ;
     for ( j=0 ; j <= 3 ; j++) begin
         keySetReg[15-j] = constants[j] ;
     end

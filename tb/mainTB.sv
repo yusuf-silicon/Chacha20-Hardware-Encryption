@@ -93,8 +93,8 @@ end
 
 //store values into BRAM
 initial begin
-    $readmemh("../../../../../data/value.txt" , valueMem) ;
-    $readmemh("../../../../../data/nonce.txt" , nonceMem) ;
+    $readmemh("../../../../../../data/value.txt" , valueMem) ;
+    $readmemh("../../../../../../data/nonce.txt" , nonceMem) ;
 //    for ( i=0 ; i < 5 ; i++ ) begin
 //        $display("The value of valueMem at [ %d ] is: %h",i*100,valueMem[i*100]) ; 
 //    end 
@@ -155,7 +155,6 @@ task fetchinput(output [WORD_WIDTH-1:0] valueOut [WORD_LENGTH-1:0], output [WORD
     for ( i=0 ; i < WORD_LENGTH ; i++ ) begin
         valueOut[i] = valueMem[j];
         j = (j == 1599) ? 0 : j + 1 ;
-        j++;
     end 
     for ( i=0 ; i < 3 ; i++ ) begin
         nonceOut[i] = nonceMem[$urandom_range(NONCE_COUNT-1)];

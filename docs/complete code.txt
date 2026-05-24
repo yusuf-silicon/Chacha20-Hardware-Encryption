@@ -1,0 +1,518 @@
+`timescale 1ns / 1ps
+
+module top #(
+    parameter BLOCK_WIDTH = 512,
+    parameter WORD_WIDTH  = 32 ,
+    parameter WORD_LENGTH = 16 
+) (
+    input  wire                  clock                         , // global clock
+    input  wire                  reset_n                       , // global reset_n
+
+    input  wire                  value_valid                   , // handshake valid received
+    input  wire [WORD_WIDTH-1:0] value       [WORD_LENGTH-1:0] , // input - value (512 bits)
+    output wire                  value_ready                   , // handshake ready sent
+
+    input  wire                  nonce_valid                   , // handshake valid received             
+    input  wire [WORD_WIDTH-1:0] nonce       [2:0]             , // input - nonce (96 bits)       
+    output wire                  nonce_ready                   , // handshake ready sent
+
+    output wire                  code_valid                    , // handshake valid received
+    output wire [WORD_WIDTH-1:0] code        [WORD_LENGTH-1:0] , // output - value (512 bits)
+    input  wire                  code_ready                      // handshake ready sent
+) ;
+
+//-----------------------------------------------------------------------------------------------
+//   Sub Module Initialisation                                                                     
+//-----------------------------------------------------------------------------------------------
+
+core core_entity (
+    .clock       (clock      ) ,                    
+    .reset_n     (reset_n    ) ,                          
+    .value_valid (value_valid) ,                                  
+    .value       (value      ) ,                    
+    .value_ready (value_ready) ,                                  
+    .nonce_valid (nonce_valid) ,                                  
+    .nonce       (nonce      ) ,                    
+    .nonce_ready (nonce_ready) ,                                  
+    .code_valid  (code_valid ) ,                             
+    .code        (code       ) ,                   
+    .code_ready  (code_ready )                              
+);
+
+endmodule
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 21.09.2025 15:13:12
+// Design Name: 
+// Module Name: main
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module core #(
+    parameter BLOCK_WIDTH = 512,
+    parameter WORD_WIDTH  = 32 ,
+    parameter WORD_LENGTH = 16 
+) (
+    input  wire                  clock       ,                   //global clock
+    input  wire                  reset_n     ,                   //global reset_n
+
+    input  wire                  value_valid ,                   // tells ready to send next input
+    input  wire [WORD_WIDTH-1:0] value [WORD_LENGTH-1:0] ,       // input - value (512 bits)
+    output wire                  value_ready ,                   // tells ready to receive next input
+
+    input  wire                  nonce_valid ,
+    input  wire [WORD_WIDTH-1:0] nonce [2:0] ,
+    output wire                  nonce_ready ,
+
+    output wire                  code_valid ,                   // tells ready to send next input
+    output wire [WORD_WIDTH-1:0] code [WORD_LENGTH-1:0] ,       // input - value (512 bits)
+    input  wire                  code_ready                    // tells ready to receive next input
+) ;
+
+//-----------------------------------------------------------------------------------------------
+//   Internal Signals & FSM Setup                                                                    
+//-----------------------------------------------------------------------------------------------
+
+reg  [WORD_WIDTH-1:0] keySetReg   [WORD_LENGTH-1:0]        ;
+wire [WORD_WIDTH-1:0] keySetWire  [WORD_LENGTH-1:0]        ;
+reg                   keySetReady = 0                      ;
+
+reg  [WORD_WIDTH-1:0] valueReg    [WORD_LENGTH-1:0]        ;
+reg                   valueReady  = 0                      ;
+
+reg                   keyTaken    = 0                      ;
+reg                   valueTaken  = 0                      ;
+reg                   keySetValid                          ;
+
+//signals and flags for fsm state KEY_OPR
+reg                   keyEncryptionValid = 0               ;
+reg                   keyEncrypted       = 0               ;
+reg                   keyEncryptionSent  = 0               ;
+
+wire                  encryptedKeyValid                    ;
+wire [WORD_WIDTH-1:0] encryptedKeySet    [WORD_LENGTH-1:0] ;
+reg                   encryptedKeyReady  = 0               ;
+        
+//signals and flags for fsm state VAL_OPR
+reg valueEncrypted = 0 ;
+integer i          = 0 ;
+
+//signals and flags for fsm state SEND
+reg codeValid      = 0 ; 
+reg codeSent       = 0 ; 
+
+//fsm states
+typedef enum logic [1:0] {
+    IDLE    ,
+    KEY_OPR ,
+    VAL_OPR ,
+    SEND    
+} state ;
+
+state current_state, next_state ;
+
+//-----------------------------------------------------------------------------------------------
+//   Sub Module Initialisation                                                                     
+//-----------------------------------------------------------------------------------------------
+
+key_manager key_manager_entity(
+    .clock                (clock             ) ,       
+    .reset_n              (reset_n           ) ,       
+
+    .key_set_valid        (keySetValid       ) ,       
+    .key_set              (keySetWire        ) ,       
+    .key_set_ready        (keySetReady       ) ,        
+
+    .nonce_valid          (nonce_valid       ) ,
+    .nonce                (nonce             ) ,
+    .nonce_ready          (nonce_ready       )       
+);
+
+quarter_round quarter_round_entity(
+    .clock                (clock             ) , 
+    .reset_n              (reset_n           ) ,     
+
+    .key_encryption_valid (keyEncryptionValid) ,                            
+    .key_set              (keySetReg         ) ,     
+    
+    .encrypted_key_valid  (encryptedKeyValid ) ,                               
+    .key                  (encryptedKeySet   )
+);
+
+//-----------------------------------------------------------------------------------------------
+//   Module Logic                                                                     
+//-----------------------------------------------------------------------------------------------
+
+always_ff @( posedge clock or negedge reset_n ) begin : Current_State_Register
+    if (!reset_n) begin
+        current_state <= IDLE ;
+    end else begin
+        current_state <= next_state ;
+    end 
+end
+
+always_comb begin : Next_State_Logic
+    next_state = current_state ;
+    case (current_state)
+        IDLE : begin
+            if (valueTaken && keyTaken) begin
+                next_state = KEY_OPR ;
+            end
+        end
+        KEY_OPR : begin
+            if (keyEncrypted) begin
+                next_state = VAL_OPR ;
+            end
+        end 
+        VAL_OPR : begin
+            if (valueEncrypted) begin
+                next_state = SEND ;
+            end
+        end 
+        SEND : begin
+            if (codeSent) begin
+                next_state = IDLE ;
+            end
+        end 
+        default: next_state = IDLE ; 
+    endcase
+end
+
+always_ff @(posedge clock or negedge reset_n ) begin : Output_Logic
+    if (!reset_n) begin
+        valueTaken         <= 0 ;
+        valueReady         <= 0 ;
+        keySetReady        <= 0 ;
+        keyTaken           <= 0 ;
+        
+        keyEncryptionValid <= 0 ;
+        encryptedKeyReady  <= 0 ;
+        keyEncryptionSent  <= 0 ;
+        keyEncrypted       <= 0 ;
+
+        valueEncrypted     <= 0 ;
+        i <= 0 ;
+
+        codeValid <= 0 ;
+
+    end else begin
+        case (current_state)
+            IDLE : begin
+                
+                codeValid   <= 0 ;
+                codeSent    <= 0 ;
+                
+                valueReady  <= valueTaken ? 0 : 1 ;
+                keySetReady <= keyTaken   ? 0 : 1 ;
+                
+                if (!valueTaken && value_valid) begin
+                    valueTaken <= 1     ;
+                    valueReg   <= value ;
+                end
+                if (!keyTaken   && keySetValid) begin
+                    keyTaken  <= 1          ;
+                    keySetReg <= keySetWire ;
+                end
+
+            end KEY_OPR : begin
+                
+                valueReady   <= 0 ;     //  
+                keySetReady  <= 0 ;     //  reset previous state values
+                valueTaken   <= 0 ;     //  
+                keyTaken     <= 0 ;     //  
+                
+                keyEncryptionValid <= keyEncryptionSent ? 0 : 1 ;
+                keyEncryptionSent <= 1 ;
+                encryptedKeyReady <= keyEncryptionSent ? 1 : 0; 
+                
+                if (encryptedKeyReady && encryptedKeyValid) begin 
+                    for ( i=0 ; i < WORD_LENGTH ; i++ ) begin
+                        keySetReg[i] <= keySetReg[i] + encryptedKeySet[i] ;
+                    end
+                    keyEncrypted <= 1 ; 
+                end
+
+            end VAL_OPR : begin
+                
+                keyEncryptionSent  <= 0 ;
+                keyEncryptionValid <= 0 ;
+                encryptedKeyReady  <= 0 ;
+                keyEncrypted       <= 0 ;
+                
+                if (!valueEncrypted) begin
+                    valueEncrypted <= 1 ;
+                    for ( i=0 ; i < WORD_LENGTH ; i++ ) begin
+                        valueReg[i] <= valueReg[i] ^ keySetReg[i] ;
+                    end
+                end
+
+            end SEND    : begin
+                
+                valueEncrypted <= 0 ;
+                codeValid <= 1 ;                
+                if (codeValid && code_ready) begin
+                    codeSent <= 1 ;
+                end
+                
+            end
+        endcase
+    end
+end
+
+assign value_ready = valueReady ;
+assign code_valid  = codeValid  ;
+assign code        = valueReg   ;
+
+endmodule
+
+`timescale 1ns / 1ps
+
+module key_manager #(
+    parameter BLOCK_WIDTH = 512,
+    parameter WORD_WIDTH  = 32 ,
+    parameter WORD_LENGTH = 16 ,
+    parameter CONST_COUNT = 4 ,
+    parameter KEYS_COUNT  = 8000 
+) (
+    input  wire                  clock                     ,       //global clock
+    input  wire                  reset_n                   ,       //global reset_n
+            
+    output wire                  key_set_valid             ,       // tells ready to send next input
+    output wire [WORD_WIDTH-1:0] key_set [WORD_LENGTH-1:0] ,       // input - keySet (512 bits)
+    input  wire                  key_set_ready             ,       // tells ready to receive next input
+
+    input  wire                  nonce_valid               ,
+    input  wire [WORD_WIDTH-1:0] nonce [2:0]               ,
+    output wire                  nonce_ready   
+) ;
+
+//-----------------------------------------------------------------------------------------------
+//   Block RAM
+//-----------------------------------------------------------------------------------------------
+
+reg [WORD_WIDTH-1:0] constants [CONST_COUNT-1:0] ;      // Stores Constants
+reg [WORD_WIDTH-1:0] keys      [KEYS_COUNT-1:0]  ;      // Stores Keys
+
+//-----------------------------------------------------------------------------------------------
+//   Internal Signals & Values
+//-----------------------------------------------------------------------------------------------
+
+reg [WORD_WIDTH-1:0] keySetReg [WORD_LENGTH-1:0] ;
+
+reg nonceReady     = 0 ;
+
+reg keyReady       = 0 ;
+reg keySetValid    = 0 ;
+
+integer count      = 0 ;
+integer indexKey   = 0 ;
+
+integer i = 0;
+integer j = 0;
+
+//-----------------------------------------------------------------------------------------------
+//   Module Logic                                                                     
+//-----------------------------------------------------------------------------------------------
+
+initial begin
+    $readmemh("../../../../../../data/constants.txt",constants) ;
+    $readmemh("../../../../../../data/keys.txt",keys)           ;
+    for ( j=0 ; j <= 3 ; j++) begin
+        keySetReg[15-j] = constants[j] ;
+    end
+//    $display("PWD at runtime = %s", `__FILE__);
+//    $display("Trying to read keys from: %s", "keys.hex");
+//    for ( i=0 ; i < 4 ; i++ ) begin
+//        $display("The value of constants at [ %d ] is: %h",i, constants[i]) ; 
+//        $display("The value of constants inside keySetReg is at [ %d ] is: %h",(15-i), keySetReg[15-i]) ; 
+//    end
+//    for ( i=0 ; i < 5 ; i++ ) begin
+//        $display("The value of keys at [ %d ] is: %h",i*100, keys[i*100]) ; 
+//    end
+end
+
+always_ff @(posedge clock or negedge reset_n) begin
+    if (!reset_n) begin
+        keyReady    <= 0 ;
+        keySetValid <= 0 ;
+        nonceReady  <= 1 ;
+        count       <= 0 ;
+        indexKey    <= 0 ;
+        i <= 0 ;
+
+    end else begin
+        if (!keyReady && nonce_valid) begin
+            keySetValid <= 0 ;
+            for ( i=0 ; i < 8 ; i++ ) begin
+                keySetReg[11-i] <= keys[$urandom % KEYS_COUNT] ;
+            end
+            if (count == 32'hffffffff) begin
+                keySetReg[3] <= count ;
+                count <= 0               ;
+            end else begin
+                keySetReg[3] <= count ; 
+                count++                  ;
+            end
+            for ( i=0 ; i < 3 ; i++ ) begin
+                keySetReg[2-i] <= nonce[2-i];
+            end
+            nonceReady <= 0   ;
+            keyReady <= 1     ;
+        end
+        if (keyReady) begin
+            keySetValid <= 1 ;
+            if (key_set_ready) begin
+                keyReady <= 0;
+                nonceReady <= 1;
+            end
+        end
+    end
+end
+
+assign key_set_valid = keySetValid ;
+assign key_set = keySetReg         ;
+assign nonce_ready = nonceReady    ;
+
+endmodule
+
+`timescale 1ns / 1ps
+
+module quarter_round #(
+    parameter BLOCK_WIDTH = 512,
+    parameter WORD_WIDTH  = 32 ,
+    parameter WORD_LENGTH = 16 
+) (
+    input  wire                  clock                     ,       //global clock
+    input  wire                  reset_n                   ,       //global reset_n
+
+    input  wire                  key_encryption_valid      ,
+    input  wire [WORD_WIDTH-1:0] key_set [WORD_LENGTH-1:0] ,
+    
+    output wire                  encrypted_key_valid       ,
+    output wire [WORD_WIDTH-1:0] key [WORD_LENGTH-1:0] 
+);
+
+//-----------------------------------------------------------------------------------------------
+//   Internal Signals & FSM Setup                                                                    
+//-----------------------------------------------------------------------------------------------
+
+reg done = 0 ;        //main cycle complete
+
+typedef reg [WORD_WIDTH-1:0] typeWordSet [3:0]            ;
+typedef reg [WORD_WIDTH-1:0] typeKeySet [WORD_LENGTH-1:0] ;
+
+typeWordSet          qtrRndKey  ;
+typeKeySet           keySetTemp ;
+reg [WORD_WIDTH-1:0] keySet [WORD_LENGTH-1:0] ;
+
+reg keyEncryptionValid = 0 ; 
+reg keyEncryptionTaken = 0 ;
+reg keyEncrypting      = 0 ;
+reg keyEncryptingDone  = 0 ;
+
+reg encryptedKeyValid  = 0 ;
+
+int iterations     = 20 ;
+int iterationCount = iterations ;
+int qrtRndCount    = 4  ;
+int arrIndex       = 0  ;
+
+int arr1 [8] = '{0,1,2,3,0,1,2,3} ;
+int arr2 [8] = '{4,5,6,7,5,6,7,4} ;
+int arr3 [8] = '{8,9,10,11,10,11,8,9} ;
+int arr4 [8] = '{12,13,14,15,15,12,13,14} ;
+
+int i = 0;
+
+//-----------------------------------------------------------------------------------------------
+//   Module Logic                                                                     
+//-----------------------------------------------------------------------------------------------
+
+function typeWordSet quarterRound(input typeKeySet keySet, input int i1, input int i2, input int i3, input int i4);
+    typeWordSet wordSet ;
+    
+    keySet[i1] = keySet[i1] + keySet[i2] ; keySet[i4] = keySet[i4] ^ keySet[i1] ; keySet[i4] <<<= 16 ;
+    keySet[i3] = keySet[i3] + keySet[i4] ; keySet[i2] = keySet[i2] ^ keySet[i3] ; keySet[i2] <<<= 12 ;
+    keySet[i1] = keySet[i1] + keySet[i2] ; keySet[i4] = keySet[i4] ^ keySet[i1] ; keySet[i4] <<<= 8  ;
+    keySet[i3] = keySet[i3] + keySet[i4] ; keySet[i2] = keySet[i2] ^ keySet[i3] ; keySet[i2] <<<= 7  ;
+    
+    wordSet[0] = keySet[i1] ;
+    wordSet[1] = keySet[i2] ;
+    wordSet[2] = keySet[i3] ; 
+    wordSet[3] = keySet[i4] ;
+    
+    return wordSet ;
+endfunction
+
+always_ff @(posedge clock or negedge reset_n) begin
+    if (!reset_n) begin
+        done <= 0 ; 
+
+        keyEncryptionValid <= 0 ;
+        keyEncryptionTaken <= 0 ;
+        keyEncrypting      <= 0 ;
+        keyEncryptingDone  <= 0 ;
+        encryptedKeyValid  <= 0 ;
+        iterationCount     <= 20;
+        arrIndex           <= 0 ;
+        i  <= 0 ;
+    end else begin
+        if (key_encryption_valid && done) begin
+            done <= 0 ;
+            encryptedKeyValid <= 0 ;
+            keySet <= key_set ;
+            keyEncryptionTaken <= 1 ;
+        end else if (keyEncryptionTaken) begin              //main reason to store keys inside keySetTemp
+            keyEncryptionTaken <= 0 ;
+            keyEncrypting      <= 1 ;
+            for ( i=0 ; i < WORD_LENGTH ; i++ ) begin
+                keySetTemp[i] <= keySet[i] ;
+            end
+        end else if (keyEncrypting) begin                   
+            for ( i=0 ; i < qrtRndCount ; i++ ) begin
+                qtrRndKey = quarterRound(keySetTemp, arr1[arrIndex], arr2[arrIndex], arr3[arrIndex], arr4[arrIndex]) ;
+                keySetTemp[arr1[arrIndex]] <= qtrRndKey[0] ;
+                keySetTemp[arr2[arrIndex]] <= qtrRndKey[1] ;
+                keySetTemp[arr3[arrIndex]] <= qtrRndKey[2] ;
+                keySetTemp[arr4[arrIndex]] <= qtrRndKey[3] ;
+                arrIndex <= (arrIndex == 7) ? 0 : arrIndex + 1 ;
+                iterationCount-- ;
+            end
+            if (iterationCount == 0) begin
+                keyEncrypting  <= 00 ;
+                iterationCount <= 20 ;
+                keyEncryptingDone <= 1 ;
+            end
+        end else if (keyEncryptingDone) begin
+            for ( i=0 ; i < WORD_LENGTH; i++ ) begin
+                keySet[i] <= keySetTemp[i] ;
+            end
+            encryptedKeyValid <= 1 ;
+            keyEncryptingDone <= 0 ;
+        end
+        else begin
+            encryptedKeyValid <= 0 ;
+            done              <= 1 ;
+        end
+    end
+end
+
+ assign encrypted_key_valid = encryptedKeyValid ;
+ assign key = keySet ;
+
+endmodule
